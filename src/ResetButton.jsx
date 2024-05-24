@@ -6,8 +6,8 @@ const ResetButton = ({
   setTens,
   setHundreds,
   setThousands,
-  setMillions,
-  setTenMillions,
+  setTenThousands,
+  setHundredThousands,
 }) => {
   const resetCounter = () => {
     console.log("reset");
@@ -15,8 +15,8 @@ const ResetButton = ({
     setTens(0);
     setHundreds(0);
     setThousands(0);
-    setMillions(0);
-    setTenMillions(0);
+    setTenThousands(0);
+    setHundredThousands(0);
   };
 
   return (
@@ -31,8 +31,8 @@ ResetButton.propTypes = {
   setTens: PropTypes.func.isRequired,
   setHundreds: PropTypes.func.isRequired,
   setThousands: PropTypes.func.isRequired,
-  setMillions: PropTypes.func.isRequired,
-  setTenMillions: PropTypes.func.isRequired,
+  setTenThousands: PropTypes.func.isRequired,
+  setHundredThousands: PropTypes.func.isRequired,
 };
 
 export default ResetButton;

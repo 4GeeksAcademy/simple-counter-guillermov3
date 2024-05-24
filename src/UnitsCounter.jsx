@@ -9,8 +9,8 @@ const UnitsCounter = () => {
   const [tens, setTens] = useState(0);
   const [hundreds, setHundreds] = useState(0);
   const [thousands, setThousands] = useState(0);
-  const [millions, setMillions] = useState(0);
-  const [tenMillions, setTenMillions] = useState(0);
+  const [tenThousands, setTenThousands] = useState(0);
+  const [hundredThousands, setHundredThousands] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
@@ -27,14 +27,14 @@ const UnitsCounter = () => {
                 if (prevHundreds === 9) {
                   setThousands((prevThousands) => {
                     if (prevThousands === 9) {
-                      setMillions((prevMillions) => {
-                        if (prevMillions === 9) {
-                          setTenMillions(
-                            (prevTenMillions) => prevTenMillions + 1
+                      setTenThousands((prevtenThousands) => {
+                        if (prevtenThousands === 9) {
+                          setHundredThousands(
+                            (prevHundredThousands) => prevHundredThousands + 1
                           );
                           return 0;
                         } else {
-                          return prevMillions + 1;
+                          return prevtenThousands + 1;
                         }
                       });
                       return 0;
@@ -60,17 +60,17 @@ const UnitsCounter = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [units, isRunning]);
+  }, [isRunning]);
 
   return (
     <div className="flex h-24 bg-black text-center w-full justify-center gap-x-2.5">
-      <Counter>
+      <Counter value={null}>
         <p>
           <i className="fa-regular fa-clock"></i>
         </p>
       </Counter>
-      <Counter value={tenMillions} />
-      <Counter value={millions} />
+      <Counter value={hundredThousands} />
+      <Counter value={tenThousands} />
       <Counter value={thousands} />
       <Counter value={hundreds} />
       <Counter value={tens} />
@@ -80,8 +80,8 @@ const UnitsCounter = () => {
         setTens={setTens}
         setHundreds={setHundreds}
         setThousands={setThousands}
-        setMillions={setMillions}
-        setTenMillions={setTenMillions}
+        setTenThousands={setTenThousands}
+        setHundredThousands={setHundredThousands}
       />
       <OnOffButton
         isRunning={isRunning}
