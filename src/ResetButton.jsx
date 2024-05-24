@@ -10,7 +10,7 @@ const ResetButton = ({
   setTenMillions,
 }) => {
   const resetCounter = () => {
-    console.log("reset")
+    console.log("reset");
     setUnits(0);
     setTens(0);
     setHundreds(0);

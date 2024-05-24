@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Counter from "./Counter";
 import ResetButton from "./ResetButton";
+import OnOffButton from "./OnOffButton";
 
 const UnitsCounter = () => {
   console.log("UnitsCounter");
@@ -10,9 +11,12 @@ const UnitsCounter = () => {
   const [thousands, setThousands] = useState(0);
   const [millions, setMillions] = useState(0);
   const [tenMillions, setTenMillions] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     console.log("useEffect");
+    if (!isRunning) return;
+    console.log(isRunning);
     const interval = setInterval(() => {
       console.log("interval");
       setUnits((prevUnits) => {
@@ -25,7 +29,9 @@ const UnitsCounter = () => {
                     if (prevThousands === 9) {
                       setMillions((prevMillions) => {
                         if (prevMillions === 9) {
-                          setTenMillions((prevTenMillions) => prevTenMillions + 1);
+                          setTenMillions(
+                            (prevTenMillions) => prevTenMillions + 1
+                          );
                           return 0;
                         } else {
                           return prevMillions + 1;
@@ -54,7 +60,7 @@ const UnitsCounter = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [units, isRunning]);
 
   return (
     <div className="flex h-24 bg-black text-center w-full justify-center gap-x-2.5">
@@ -69,13 +75,17 @@ const UnitsCounter = () => {
       <Counter value={hundreds} />
       <Counter value={tens} />
       <Counter value={units} />
-      <ResetButton 
+      <ResetButton
         setUnits={setUnits}
         setTens={setTens}
         setHundreds={setHundreds}
         setThousands={setThousands}
         setMillions={setMillions}
         setTenMillions={setTenMillions}
+      />
+      <OnOffButton
+        isRunning={isRunning}
+        toggleRunning={() => setIsRunning(!isRunning)}
       />
     </div>
   );

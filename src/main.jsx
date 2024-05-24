@@ -5,6 +5,6 @@ import UnitsCounter from "./UnitsCounter";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <UnitsCounter />
+    <UnitsCounter />    
   </>
 );
