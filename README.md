@@ -1,4 +1,7 @@
 # React + Vite
 
-Para levantar el proyecto: npm install / npm run dev
+Como levantar el proyecto:
 
+Instala los paquetes con: $ npm install.
+
+Ejecute el servidor con $ npm run dev.

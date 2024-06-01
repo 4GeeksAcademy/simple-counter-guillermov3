@@ -4,7 +4,6 @@ import ResetButton from "./ResetButton";
 import OnOffButton from "./OnOffButton";
 
 const UnitsCounter = () => {
-  console.log("UnitsCounter");
   const [units, setUnits] = useState(0);
   const [tens, setTens] = useState(0);
   const [hundreds, setHundreds] = useState(0);
@@ -14,53 +13,69 @@ const UnitsCounter = () => {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect");
     if (!isRunning) return;
-    console.log(isRunning);
+
     const interval = setInterval(() => {
-      console.log("interval");
-      setUnits((prevUnits) => {
-        if (prevUnits === 9) {
-          setTens((prevTens) => {
-            if (prevTens === 9) {
-              setHundreds((prevHundreds) => {
-                if (prevHundreds === 9) {
-                  setThousands((prevThousands) => {
-                    if (prevThousands === 9) {
-                      setTenThousands((prevtenThousands) => {
-                        if (prevtenThousands === 9) {
-                          setHundredThousands(
-                            (prevHundredThousands) => prevHundredThousands + 1
-                          );
-                          return 0;
-                        } else {
-                          return prevtenThousands + 1;
-                        }
-                      });
-                      return 0;
-                    } else {
-                      return prevThousands + 1;
-                    }
-                  });
-                  return 0;
-                } else {
-                  return prevHundreds + 1;
-                }
-              });
-              return 0;
-            } else {
-              return prevTens + 1;
-            }
-          });
-          return 0;
-        } else {
-          return prevUnits + 1;
-        }
-      });
+      updateUnits();
     }, 1000);
 
     return () => clearInterval(interval);
   }, [isRunning]);
+
+  const updateUnits = () => {
+    setUnits((prevUnits) => {
+      if (prevUnits === 9) {
+        updateTens();
+        return 0;
+      } else {
+        return prevUnits + 1;
+      }
+    });
+  };
+
+  const updateTens = () => {
+    setTens((prevTens) => {
+      if (prevTens === 9) {
+        updateHundreds();
+        return 0;
+      } else {
+        return prevTens + 1;
+      }
+    });
+  };
+
+  const updateHundreds = () => {
+    setHundreds((prevHundreds) => {
+      if (prevHundreds === 9) {
+        updateThousands();
+        return 0;
+      } else {
+        return prevHundreds + 1;
+      }
+    });
+  };
+
+  const updateThousands = () => {
+    setThousands((prevThousands) => {
+      if (prevThousands === 9) {
+        updateTenThousands();
+        return 0;
+      } else {
+        return prevThousands + 1;
+      }
+    });
+  };
+
+  const updateTenThousands = () => {
+    setTenThousands((prevtenThousands) => {
+      if (prevtenThousands === 9) {
+        setHundredThousands((prevHundredThousands) => prevHundredThousands + 1);
+        return 0;
+      } else {
+        return prevtenThousands + 1;
+      }
+    });
+  };
 
   return (
     <div className="flex h-24 bg-black text-center w-full justify-center gap-x-2.5">
